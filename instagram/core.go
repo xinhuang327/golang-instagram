@@ -8,6 +8,7 @@ import (
 	// "io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 var (
@@ -50,6 +51,21 @@ func buildGetRequest(urlStr string, params url.Values) (*http.Request, error) {
 	return http.NewRequest("GET", u.String(), nil)
 }
 
+func buildPostRequest(urlStr string, params url.Values) (*http.Request, error) {
+	u, err := url.Parse(urlStr)
+	if err != nil {
+		return nil, err
+	}
+
+	// If we are getting, then we can't merge query params
+	postBody := ""
+	if params != nil {
+		postBody = params.Encode()
+	}
+
+	return http.NewRequest("POST", u.String(), strings.NewReader(postBody))
+}
+
 func (api *Api) extendParams(p url.Values) url.Values {
 	if p == nil {
 		p = url.Values{}
@@ -65,6 +81,15 @@ func (api *Api) extendParams(p url.Values) url.Values {
 func (api *Api) get(path string, params url.Values, r interface{}) error {
 	params = api.extendParams(params)
 	req, err := buildGetRequest(urlify(path), params)
+	if err != nil {
+		return err
+	}
+	return api.do(req, r)
+}
+
+func (api *Api) post(path string, params url.Values, r interface{}) error {
+	params = api.extendParams(params)
+	req, err := buildPostRequest(urlify(path), params)
 	if err != nil {
 		return err
 	}

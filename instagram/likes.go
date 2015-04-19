@@ -13,3 +13,9 @@ func (api *Api) GetMediaLikes(mediaId string, params url.Values) (res *UsersResp
 	err = api.get(fmt.Sprintf("/media/%s/likes", mediaId), params, res)
 	return
 }
+
+func (api *Api) PostMediaLike(mediaId string) (res *UsersResponse, err error) {
+	res = new(UsersResponse)
+	err = api.post(fmt.Sprintf("/media/%s/likes", mediaId), nil, res)
+	return
+}

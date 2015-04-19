@@ -13,3 +13,11 @@ func (api *Api) GetMediaComments(mediaId string, params url.Values) (res *Commen
 	err = api.get(fmt.Sprintf("/media/%s/comments", mediaId), params, res)
 	return
 }
+
+func (api *Api) PostMediaComment(mediaId string, comment string) (res *CommentsResponse, err error) {
+	res = new(CommentsResponse)
+	params := url.Values{}
+	params.Set("text", comment)
+	err = api.post(fmt.Sprintf("/media/%s/comments", mediaId), params, res)
+	return
+}

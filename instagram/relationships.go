@@ -40,3 +40,11 @@ func (api *Api) GetUserRelationship(userId string, params url.Values) (res *Rela
 	err = api.get(fmt.Sprintf("/users/%s/relationship", userId), params, res)
 	return
 }
+
+func (api *Api) PostUserRelationship(userId string, action string) (res *RelationshipResponse, err error) {
+	res = new(RelationshipResponse)
+	params := url.Values{}
+	params.Set("action", action)
+	err = api.post(fmt.Sprintf("/users/%s/relationship", userId), params, res)
+	return
+}
