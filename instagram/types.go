@@ -53,7 +53,7 @@ type Position struct {
 
 // Instagram tag
 type Tag struct {
-	MediaCount int64 `json:"media_count"`
+	MediaCount float64 `json:"media_count"`
 	Name       string
 }
 

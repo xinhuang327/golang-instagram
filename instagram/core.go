@@ -96,8 +96,14 @@ func (api *Api) post(path string, params url.Values, r interface{}) error {
 	return api.do(req, r)
 }
 
+var httpClient = http.DefaultClient
+
+func SetHttpClient(client *http.Client) {
+	httpClient = client
+}
+
 func (api *Api) do(req *http.Request, r interface{}) error {
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := httpClient.Do(req)
 	if err != nil {
 		return err
 	}
