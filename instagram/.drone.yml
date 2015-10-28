@@ -1,0 +1,13 @@
+build:
+  image: golang
+  commands:
+    - go get
+    - go build
+    - git clone http://$$GITAUTH@git.noapp.net/adrian/REL_golang-instagram $GOPATH/src/git.noapp.net/adrian/REL_golang-instagram
+    - cp -r $GOPATH/src/github.com/xinhuang327/golang-instagram/* $GOPATH/src/git.noapp.net/adrian/REL_golang-instagram
+    - cd $GOPATH/src/git.noapp.net/adrian/REL_golang-instagram
+    - git add .
+    - git config --global user.email "you@example.com"
+    - git config --global user.name "Your Name"
+    - git commit -m "Another deploy release"
+    - git push
