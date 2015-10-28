@@ -60,6 +60,11 @@ type RelationshipResponse struct {
 	Relationship *Relationship `json:"data"`
 }
 
+type RealtimeSubscriptionResposne struct {
+	MetaResponse
+	RealtimeSubscription []RealtimeSubscription `json:"data"`
+}
+
 type MetaResponse struct {
 	Meta *Meta
 }

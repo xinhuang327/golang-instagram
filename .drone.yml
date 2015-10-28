@@ -9,6 +9,8 @@ build:
     - go test -clientID=$$CLIENT_ID -accessToken=$$MY_TOK -myID=$$MY_ID
     - cd $GOPATH/src/github.com/xinhuang327/$REPO/auth_demo
     - go build
+    - cd $GOPATH/src/github.com/xinhuang327/$REPO/realtime_demo
+    - go build
     - GIT_MESSAGE=$(git log -1 --pretty=%B)
     - git clone http://$$GITAUTH@$$GITROOT/adrian/REL_$REPO $GOPATH/src/$$GITROOT/adrian/REL_$REPO
     - cp -r $GOPATH/src/github.com/xinhuang327/$REPO/* $GOPATH/src/$$GITROOT/adrian/REL_$REPO
@@ -17,5 +19,5 @@ build:
     - git add .
     - git config --global user.email "drone@example.com"
     - git config --global user.name "Drone"
-    - git commit -m "Build for $GIT_MESSAGE [$$COMMIT]"
+    - git commit -m "$GIT_MESSAGE [$$COMMIT]"
     - git push

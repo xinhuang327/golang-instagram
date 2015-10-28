@@ -113,3 +113,11 @@ type Attribution struct {
 	ItunesUrl string
 	Name      string
 }
+
+type RealtimeSubscription struct {
+	Id string
+	Type string
+	Object string
+	Aspect string
+	CallbackUrl string `json:"callback_url"`
+}
