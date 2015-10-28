@@ -22,3 +22,7 @@ _testmain.go
 *.exe
 
 instagram/config_test.go
+
+.idea/
+
+golang-instagram.iml
