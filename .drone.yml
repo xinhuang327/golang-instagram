@@ -5,7 +5,7 @@ build:
   commands:
     - go get -d github.com/xinhuang327/$REPO/...
     - cd $GOPATH/src/github.com/xinhuang327/$REPO/instagram
-    - go get ./...
+    - go get golang.org/x/net/proxy
     - go test -clientID=$$CLIENT_ID
     - git clone http://$$GITAUTH@$$GITROOT/adrian/REL_$REPO $GOPATH/src/$$GITROOT/adrian/REL_$REPO
     - cp -r $GOPATH/src/github.com/xinhuang327/$REPO/* $GOPATH/src/$$GITROOT/adrian/REL_$REPO
