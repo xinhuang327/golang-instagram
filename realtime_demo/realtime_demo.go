@@ -5,6 +5,7 @@ import (
 	"flag"
 	"net/http"
 	"fmt"
+	"time"
 )
 
 func main() {
@@ -57,5 +58,27 @@ func main() {
 		}
 		fmt.Fprintf(w, "%s", resp)
 	})
+
+	http.HandleFunc("/ensureSubscribed", func(w http.ResponseWriter, r *http.Request) {
+		go func() {
+			for {
+				resp, err := api.GetRealtimeSubscriptions()
+				if err == nil {
+					if len(resp.RealtimeSubscriptionList) == 0 {
+						res, err := api.SubscribeRealtime("user", "", callbackUrl)
+						if err == nil && res.RealtimeSubscription.CallbackUrl != ""{
+							fmt.Println("Renewed.")
+						} else {
+							fmt.Println(err, res)
+						}
+					}
+				} else {
+					fmt.Println(err)
+				}
+				<-time.After(10*time.Minute)
+			}
+		}()
+	})
+
 	http.ListenAndServe(":"+urlPort, nil)
 }
