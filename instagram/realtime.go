@@ -25,6 +25,12 @@ func (api *Api) SubscribeRealtime(objType string, arg string, callbackUrl string
 	return
 }
 
+func (api *Api) GetRealtimeSubscriptions() (res *RealtimeSubscriptionListResposne, err error) {
+	res = new(RealtimeSubscriptionListResposne)
+	err = api.get("/subscriptions", nil, res)
+	return
+}
+
 func (api *Api) RealtimeCallback(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("RealtimeCallback got")
 	if r.Method == "GET" && r.URL.Query().Get("hub.mode") == "subscribe"{

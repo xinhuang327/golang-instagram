@@ -65,6 +65,11 @@ type RealtimeSubscriptionResposne struct {
 	RealtimeSubscription RealtimeSubscription `json:"data"`
 }
 
+type RealtimeSubscriptionListResposne struct {
+	MetaResponse
+	RealtimeSubscriptionList []RealtimeSubscription `json:"data"`
+}
+
 type MetaResponse struct {
 	Meta *Meta
 }

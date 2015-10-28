@@ -8,6 +8,8 @@ import (
 )
 
 func main() {
+	instagram.PrintRawAPIResponse = true
+
 	var clientID, clientSec string
 	var urlRoot, urlPort string
 	var callbackUrl string
@@ -26,6 +28,15 @@ func main() {
 		callbackUrl = "http://"+urlRoot+":"+urlPort+"/"+callbackPath
 	}
 	http.HandleFunc(callbackPath, api.RealtimeCallback)
+
+	http.HandleFunc("/list",  func(w http.ResponseWriter, r *http.Request) {
+		resp, err := api.GetRealtimeSubscriptions()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		fmt.Fprintf(w, "%s", resp)
+	})
 
 	http.HandleFunc("/subscribe", func(w http.ResponseWriter, r *http.Request) {
 		objType := r.URL.Query().Get("objType")
