@@ -6,7 +6,14 @@ import (
 	"reflect"
 	"testing"
 	"time"
+	"flag"
 )
+
+var TestConfig map[string]string = map[string]string{
+	"client_id": "",
+	"access_token": "",
+	"my_id": "", // The authenticated user's ID
+}
 
 var DoAuthorizedRequests bool
 var api *Api
@@ -14,6 +21,17 @@ var ccistulli_id string = "401243155"
 var ladygaga_id string = "184692323"
 
 func init() {
+	var clientID, accessToken, myID string
+	flag.StringVar(&clientID, "clientID", "", "clientID")
+	flag.StringVar(&accessToken, "accessToken", "", "accessToken")
+	flag.StringVar(&myID, "myID", "", "myID")
+
+	TestConfig  = map[string]string{
+		"client_id": clientID,
+		"access_token": accessToken,
+		"my_id": myID, // The authenticated user's ID
+	}
+
 	DoAuthorizedRequests = (TestConfig["access_token"] != "")
 	if !DoAuthorizedRequests {
 		fmt.Println("*** Authorized requests will not performed because no access_token was specified in config_test.go")
