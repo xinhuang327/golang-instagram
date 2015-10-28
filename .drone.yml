@@ -3,7 +3,7 @@ build:
   environment:
     - REPO=golang-instagram
   commands:
-    - go get github.com/xinhuang327/$REPO
+    - go get -d
     - git clone http://$$GITAUTH@$$GITROOT/adrian/REL_$REPO $GOPATH/src/$$GITROOT/adrian/REL_$REPO
     - cp -r $GOPATH/src/github.com/xinhuang327/$REPO/* $GOPATH/src/$$GITROOT/adrian/REL_$REPO
     - cd $GOPATH/src/$$GITROOT/adrian/REL_$REPO
