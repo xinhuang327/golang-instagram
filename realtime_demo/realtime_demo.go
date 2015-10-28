@@ -1,4 +1,4 @@
-package realtime_demo
+package main
 
 import (
 	"github.com/xinhuang327/golang-instagram/instagram"
