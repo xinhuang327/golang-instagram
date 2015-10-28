@@ -4,7 +4,7 @@ build:
     - REPO=golang-instagram
   commands:
     - go get -d github.com/xinhuang327/$REPO/...
-    - go test instagram/instagram_test.go -clientID=$$CLIENT_ID
+    - go test ./instagram/ -clientID=$$CLIENT_ID
     - git clone http://$$GITAUTH@$$GITROOT/adrian/REL_$REPO $GOPATH/src/$$GITROOT/adrian/REL_$REPO
     - cp -r $GOPATH/src/github.com/xinhuang327/$REPO/* $GOPATH/src/$$GITROOT/adrian/REL_$REPO
     - cd $GOPATH/src/$$GITROOT/adrian/REL_$REPO
