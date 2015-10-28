@@ -15,14 +15,14 @@ var urlRoot, urlPort string
 func init() {
 	flag.StringVar(&clientID, "clientID", "", "clientID")
 	flag.StringVar(&clientSec, "clientSec", "", "clientSec")
-	flag.StringVar(&urlRoot, "urlRoot", "http://127.0.0.1", "urlRoot")
+	flag.StringVar(&urlRoot, "urlRoot", "127.0.0.1", "urlRoot")
 	flag.StringVar(&urlPort, "urlPort", "10099", "urlPort")
 	flag.Parse()
 }
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		autoCodeUrl := GetInstagramAuthCodeURL(urlRoot+"/authCallback")
+		autoCodeUrl := GetInstagramAuthCodeURL("http://"+urlRoot+":"+urlPort+"/authCallback")
 		http.Redirect(w, r, autoCodeUrl, http.StatusFound)
 		return
 	})
