@@ -16,7 +16,7 @@ func init() {
 	flag.StringVar(&clientID, "clientID", "", "clientID")
 	flag.StringVar(&clientSec, "clientSec", "", "clientSec")
 	flag.StringVar(&urlRoot, "urlRoot", "127.0.0.1", "urlRoot")
-	flag.StringVar(&urlPort, "urlPort", "10099", "urlPort")
+	flag.StringVar(&urlPort, "urlPort", "10098", "urlPort")
 	flag.Parse()
 }
 

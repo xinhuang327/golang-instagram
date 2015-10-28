@@ -6,7 +6,7 @@ build:
     - go get -d github.com/xinhuang327/$REPO/...
     - cd $GOPATH/src/github.com/xinhuang327/$REPO/instagram
     - go get golang.org/x/net/proxy
-    - go test -clientID=$$CLIENT_ID
+    - go test -clientID=$$CLIENT_ID -accessToken=$$MY_TOK -myID=$$MY_ID
     - cd $GOPATH/src/github.com/xinhuang327/$REPO/auth_demo
     - go build
     - git clone http://$$GITAUTH@$$GITROOT/adrian/REL_$REPO $GOPATH/src/$$GITROOT/adrian/REL_$REPO
