@@ -8,14 +8,17 @@ import (
 )
 
 func main() {
-	var clientID string
+	var clientID, clientSec string
 	var urlRoot, urlPort string
 	flag.StringVar(&clientID, "clientID", "", "clientID")
+	flag.StringVar(&clientSec, "clientSec", "", "clientID")
 	flag.StringVar(&urlRoot, "urlRoot", "127.0.0.1", "urlRoot")
 	flag.StringVar(&urlPort, "urlPort", "10097", "urlPort")
 	flag.Parse()
 
-	api := instagram.New(clientID, "")
+	api := instagram.Api{}
+	api.ClientId = clientID
+	api.ClientSecret = clientSec
 	callbackPath := "/realtimeCallback"
 	http.HandleFunc(callbackPath, api.RealtimeCallback)
 

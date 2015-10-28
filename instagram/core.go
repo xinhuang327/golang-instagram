@@ -16,8 +16,9 @@ var (
 )
 
 type Api struct {
-	ClientId    string
-	AccessToken string
+	ClientId     string
+	ClientSecret string
+	AccessToken  string
 }
 
 // Create an API with either a ClientId OR an accessToken. Only one is required. Access tokens are preferred because they keep rate limiting down.
@@ -74,6 +75,9 @@ func (api *Api) extendParams(p url.Values) url.Values {
 		p.Set("access_token", api.AccessToken)
 	} else {
 		p.Set("client_id", api.ClientId)
+	}
+	if api.ClientSecret != "" {
+		p.Set("client_secret", api.ClientSecret)
 	}
 	return p
 }
