@@ -1,11 +1,12 @@
 build:
   image: golang
+  environment:
+    - REPO=golang-instagram
   commands:
     - go get
-    - go build
-    - git clone http://$$GITAUTH@git.noapp.net/adrian/REL_golang-instagram $GOPATH/src/git.noapp.net/adrian/REL_golang-instagram
-    - cp -r $GOPATH/src/github.com/xinhuang327/golang-instagram/* $GOPATH/src/git.noapp.net/adrian/REL_golang-instagram
-    - cd $GOPATH/src/git.noapp.net/adrian/REL_golang-instagram
+    - git clone http://$$GITAUTH@$$GITROOT/adrian/REL_$REPO $GOPATH/src/$$GITROOT/adrian/REL_$REPO
+    - cp -r $GOPATH/src/github.com/xinhuang327/$REPO/* $GOPATH/src/$$GITROOT/adrian/REL_$REPO
+    - cd $GOPATH/src/$$GITROOT/adrian/REL_$REPO
     - git add .
     - git config --global user.email "you@example.com"
     - git config --global user.name "Your Name"
