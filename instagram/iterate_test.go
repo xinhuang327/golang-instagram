@@ -47,7 +47,7 @@ func TestIterate_GetUserRecentMedia(t *testing.T) {
 
 	mediaChan, errChan := api.IterateMedia(res, nil)
 	for media := range mediaChan {
-		if media.User.Username != "ladygaga" {
+		if media.User.Username != "natgeo" {
 			t.Error("Got a media with wrong username?", media.User)
 		}
 	}
