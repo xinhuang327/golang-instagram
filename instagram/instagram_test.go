@@ -25,8 +25,11 @@ func init() {
 	flag.StringVar(&clientID, "clientID", "", "clientID")
 	flag.StringVar(&accessToken, "accessToken", "", "accessToken")
 	flag.StringVar(&myID, "myID", "", "myID")
+	flag.Parse()
 
-	TestConfig  = map[string]string{
+	fmt.Println("clientID", clientID)
+
+	TestConfig = map[string]string{
 		"client_id": clientID,
 		"access_token": accessToken,
 		"my_id": myID, // The authenticated user's ID
