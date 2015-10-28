@@ -62,7 +62,7 @@ type RelationshipResponse struct {
 
 type RealtimeSubscriptionResposne struct {
 	MetaResponse
-	RealtimeSubscription []RealtimeSubscription `json:"data"`
+	RealtimeSubscription RealtimeSubscription `json:"data"`
 }
 
 type MetaResponse struct {
