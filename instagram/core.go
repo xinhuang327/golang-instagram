@@ -53,6 +53,23 @@ func buildGetRequest(urlStr string, params url.Values) (*http.Request, error) {
 	return http.NewRequest("GET", u.String(), nil)
 }
 
+func buildDeleteRequest(urlStr string, params url.Values) (*http.Request, error) {
+	u, err := url.Parse(urlStr)
+	if err != nil {
+		return nil, err
+	}
+
+	// If we are getting, then we can't merge query params
+	if params != nil {
+		if u.RawQuery != "" {
+			return nil, fmt.Errorf("Cannot merge query params in urlStr and params")
+		}
+		u.RawQuery = params.Encode()
+	}
+
+	return http.NewRequest("DELETE", u.String(), nil)
+}
+
 func buildPostRequest(urlStr string, params url.Values) (*http.Request, error) {
 	u, err := url.Parse(urlStr)
 	if err != nil {
@@ -86,6 +103,15 @@ func (api *Api) extendParams(p url.Values) url.Values {
 func (api *Api) get(path string, params url.Values, r interface{}) error {
 	params = api.extendParams(params)
 	req, err := buildGetRequest(urlify(path), params)
+	if err != nil {
+		return err
+	}
+	return api.do(req, r)
+}
+
+func (api *Api) delete(path string, params url.Values, r interface{}) error {
+	params = api.extendParams(params)
+	req, err := buildDeleteRequest(urlify(path), params)
 	if err != nil {
 		return err
 	}

@@ -38,6 +38,15 @@ func main() {
 		fmt.Fprintf(w, "%s", resp)
 	})
 
+	http.HandleFunc("/delete",  func(w http.ResponseWriter, r *http.Request) {
+		resp, err := api.DeleteAllRealtimeSubscriptions()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		fmt.Fprintf(w, "%s", resp)
+	})
+
 	http.HandleFunc("/subscribe", func(w http.ResponseWriter, r *http.Request) {
 		objType := r.URL.Query().Get("objType")
 		arg := r.URL.Query().Get("arg")

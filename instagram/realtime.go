@@ -31,6 +31,14 @@ func (api *Api) GetRealtimeSubscriptions() (res *RealtimeSubscriptionListResposn
 	return
 }
 
+func (api *Api) DeleteAllRealtimeSubscriptions() (res *RealtimeSubscriptionListResposne, err error) {
+	res = new(RealtimeSubscriptionListResposne)
+	params := url.Values{}
+	params.Set("object", "all")
+	err = api.delete("/subscriptions", params, res)
+	return
+}
+
 func (api *Api) RealtimeCallback(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("RealtimeCallback got")
 	if r.Method == "GET" && r.URL.Query().Get("hub.mode") == "subscribe"{
