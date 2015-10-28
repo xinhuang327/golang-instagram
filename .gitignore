@@ -26,3 +26,5 @@ instagram/config_test.go
 .idea/
 
 golang-instagram.iml
+
+auth_demo/auth_demo
