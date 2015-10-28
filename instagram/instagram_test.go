@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 	"flag"
-"net/http"
+	"net/http"
 	"golang.org/x/net/proxy"
-"net"
+	"net"
 	"io/ioutil"
 )
 
