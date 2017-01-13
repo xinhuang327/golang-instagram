@@ -30,3 +30,5 @@ golang-instagram.iml
 auth_demo/auth_demo
 
 realtime_demo/realtime_demo
+
+instagram/config_test.go

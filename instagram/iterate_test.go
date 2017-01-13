@@ -42,12 +42,12 @@ func TestIterate_GetUserRecentMedia(t *testing.T) {
 	params.Set("count", "2") // 5 images in this set. Get them 2 at time
 	params.Set("max_timestamp", "1384161094")
 	params.Set("min_timestamp", "1382656250")
-	res, err := api.GetUserRecentMedia(ladygaga_id, params)
+	res, err := api.GetUserRecentMedia(testUserId, params)
 	checkRes(t, res.Meta, err)
 
 	mediaChan, errChan := api.IterateMedia(res, nil)
 	for media := range mediaChan {
-		if media.User.Username != "natgeo" {
+		if media.User.Username != testUsername {
 			t.Error("Got a media with wrong username?", media.User)
 		}
 	}

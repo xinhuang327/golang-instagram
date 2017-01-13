@@ -5,9 +5,17 @@ import (
 	"net/url"
 )
 
+var client_id = TestConfig["client_id"]
+var client_secret = TestConfig["client_secret"]
+var access_token = TestConfig["access_token"]
+
+func init() {
+	SetHttpClient(GetIGAPIHttpClient())
+}
+
 // ExampleNew sets up the whole instagram API
 func ExampleNew() {
-	apiAuthenticatedUser := New("client_key", "secret", "", true)
+	apiAuthenticatedUser := New(client_id, client_secret, access_token, true)
 	if ok, err := apiAuthenticatedUser.VerifyCredentials(); !ok {
 		panic(err)
 	}
@@ -17,9 +25,9 @@ func ExampleNew() {
 // ExampleApi_GetUser shows how to get a user object
 func ExampleApi_GetUser() {
 	// *** or ***
-	api := New("client_id", "client_secret", "access_token", true)
+	api := New(client_id, client_secret, access_token, true)
 
-	userResponse, err := api.GetUser("user-id", nil)
+	userResponse, err := api.GetUser("201931723", nil)
 	if err != nil {
 		panic(err)
 	}
@@ -31,7 +39,7 @@ func ExampleApi_GetUser() {
 // ExampleApi_GetUserSearch_Params shows how to use parameters
 func ExampleApi_GetUserSearch_Params() {
 	// *** need ***
-	api := New("", "client_secret", "access_token", true)
+	api := New(client_id, client_secret, access_token, true)
 
 	params := url.Values{}
 	params.Set("count", "5") // Get 5 users
@@ -50,13 +58,13 @@ func ExampleApi_GetUserSearch_Params() {
 // ExampleApi_GetUserRecentMedia : Get the most recent media published by the owner
 func ExampleApi_GetUserRecentMedia() {
 	// *** or ***
-	api := New("client_id", "client_secret", "access_token", true)
+	api := New(client_id, client_secret, access_token, true)
 
 	params := url.Values{}
 	params.Set("count", "3") // 4 images in this set
 	params.Set("max_timestamp", "1466809870")
 	params.Set("min_timestamp", "1396751898")
-	mediasResponse, err := api.GetUserRecentMedia(ccistulli_id, params)
+	mediasResponse, err := api.GetUserRecentMedia(testUserId, params)
 
 	if err != nil {
 		panic(err)
@@ -70,9 +78,9 @@ func ExampleApi_GetUserRecentMedia() {
 // ExampleApi_IterateMedia shows how to use iteration on a channel to avoid the complex pagination calls
 func ExampleApi_IterateMedia() {
 	// *** or ***
-	api := New("client_id", "client_secret", "access_token", true)
+	api := New(client_id, client_secret, access_token, true)
 
-	mediasResponse, err := api.GetUserRecentMedia("user-id", nil)
+	mediasResponse, err := api.GetUserRecentMedia("201931723", nil)
 	if err != nil {
 		panic(err)
 	}
